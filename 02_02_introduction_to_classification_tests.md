@@ -256,3 +256,10 @@ SplitINFO = - SUM((n_i / n) * log(n-I / n))
 **Q) WHich definition best describes splitINFO**
 
 - It is the information contained in the split
+
+#### SplitINFO Illustration: Case 1
+
+- Parent node has 10 records
+- Case 2: Consider 2 partitions containing 4 and 6 records
+  - SplitINFO =
+  - When SplitINFO is close to 1 it is good.
