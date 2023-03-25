@@ -42,6 +42,8 @@ Hunt's algorithm is the general structure that decision trees take to learn fro 
     2. How to determine the best split?
   - Determine when to stop splitting
 
+---
+
 ## Test conditions
 
 #### Depends on attribute types:
@@ -80,6 +82,8 @@ Hunt's algorithm is the general structure that decision trees take to learn fro 
 
 - A) We want a low degree of impurity
 
+---
+
 ## Introduction to measures of node impurity
 
 **Q) Heuristically speaking, is it better for nodes to have more impurity or less impurity?**
@@ -99,6 +103,8 @@ Gain = M_0 - M_12 vs M_0 - M_34
 ### How to find the best split?
 
 **According to the lecture, how is gain used to determine the best split?**
+
+---
 
 ## Measure of Impurity: GINI
 
@@ -187,6 +193,8 @@ Weighted GINI index for the split = (5/12)*0.32 + (7/12)*0.408 = 0.37
 
 - A) WE must try many thresholds at random.
 
+---
+
 ## Measure of node impurity: Entropy
 
 ### Alternative splitting criteria based on INFO
@@ -263,3 +271,32 @@ SplitINFO = - SUM((n_i / n) * log(n-I / n))
 - Case 2: Consider 2 partitions containing 4 and 6 records
   - SplitINFO =
   - When SplitINFO is close to 1 it is good.
+
+---
+
+## Introduction to classification tasks: Stopping criteria for tree induction
+
+- Stop expanding a node when all the records belong to the same class
+- Stop expanding a node when all the records have similar attribute values.
+- Early termination (to be discussed later)
+
+**Q) Which reason best explains why we need to establish stopping criteria for tree induction**
+
+- A) If the tree does not have stopping criteria, then it will overfit to the training data.
+  - If stopping criteria are not defined for tree induction, then the tree will continue until it has leaf nodes that correspond to each and every data point. This means the decision tree will not be able to classify test data unless is exactly the same as the training data, which would defeat the purpose of having test data.
+
+### Decision tree based classification: advantages
+
+- Inexpensive to construct
+- Extremely fast at classifying unknown records
+- Easy to interpret for small-sized trees
+- Accuracy is comparable to other classification techniques for many simple data sets
+
+**Example: C4.5**
+
+- Simple depth-first construction
+- Uses information gain
+- Sorts continuous attributes at each node
+- Needs entire data to fit in memory
+- Unsuitable for large databases
+- Uses entropy
