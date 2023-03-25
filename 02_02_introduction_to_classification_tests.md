@@ -18,7 +18,7 @@ There could be more than 1 tree to express data
 
 **Root node:** Has 0 incoming edges, and has 0 or more outgoing edges.
 **Internal node:** Has 1 incoming edge, and has two or more outgoing edges.
-**Leaf node:** Has 1 incoming edge, and has no outgoing edges.
+**Leaf node:** Has 1 incoming edge, and has no outgoing edges. they all are class attributes. (i.e. yes, no)
 
 ### Hunt's algorithm
 
@@ -103,6 +103,10 @@ Gain = M_0 - M_12 vs M_0 - M_34
 ### How to find the best split?
 
 **According to the lecture, how is gain used to determine the best split?**
+
+- Nodes with homogeneous distribution is preferred
+- Homogeneous nodes have low degree of impurity
+- Non-homogeneous nodes have high degree of impurity.
 
 ---
 
