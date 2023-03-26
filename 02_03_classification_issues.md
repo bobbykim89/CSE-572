@@ -180,12 +180,12 @@ Err(z) = Bias^2 + Variance + Irreducible Error
   - Focus on the predictive capacity of model
   - Confusion metrix
 
-| Predicted class |
-| --------------- | --------- | --------- | -------- |
-|                 |           | class=yes | class=no |
-|                 |           | --------- | -------- |
-| actual class    | class=yes | a         | b        |
-|                 | class=no  | c         | d        |
+Actual class/ Predicted class
+
+|           | class=yes | class=no |
+| --------- | --------- | -------- |
+| class=yes | a (TP)    | b (FN)   |
+| class=no  | c (FP)    | d (TN)   |
 
 ```
 Accuracy = (a + d)/(a + b + c + d) = (TP + TN) / (TP + TN + FP + FN)
@@ -246,6 +246,74 @@ r = TP / (TP + FN)
 F_1 = 2 / ((1 / r) + (1 / p)) = 2rp / (r + p)
 ```
 
+### Strategy 2: cost matrix
+
+Actual class / Predicted class
+
+| `C(ilj)`    | Class = yes  | Class = no  |
+| ----------- | ------------ | ----------- |
+| Class = yes | `C(yeslyes)` | `C(nolyes)` |
+| Class = no  | `C(yeslno)`  | `C(nolno)`  |
+
+C(i|j): Cost of misclassifying class j example as class i
+
+### Methods of estimation
+
+**Holdout**
+
+- Partition the set of labeled samples into two disjoint sets
+- Reserve 2/3 for training and 1/3 for testing
+- Accuracy estimated on the test set
+
+**Random subsampling**
+
+- Repeated holdout
+- Improved estimation of a classifier's performance
+- Overall accuracy is an average of the individual accuracies
+
+**Cross validation**
+
+- `Partition data into k disjoint subsets` of equal size
+- k-fold: `train on k-1 partitions`, test on the remaining one
+- `Repeat the process` for all the partitions
+- Characteristics of cross validations:
+  - Computationally expensive
+  - Accuracy is estimated as the average accuracy over all the k-folds
+  - The test sets are all mutually exclusive and cover the entire dataset
+  - Leave-one-out: special case with k=n; each test set contains only one record
+
+**Bootstrap**
+
+- Trainingrecords are samples with replacement
+- The same training record can be selected multiple times
+- Records not included in the bootstrap sample from the test set
+- Process repeated multiple times and the average accuracy is computed
+
+**ROC (receiver operating characteristic)**
+
+- Developed in 1950s fir signal detection theory to analyze noisy signals
+- ROC curve plots `TPR` (on y-axis) against `FPR` (on the x-axis)
+- `Each point` on the curver `corresponds` to `one of the models` induced by the classifier.
+- `Changing the threshold of algorithm`, sample distribution or cost matrix `changes the location of the point`
+
+_ROC curve_
+
+- Several critical points on the curve with well known interpretations
+- (TPR = 0;FPR = 0): Model predicts every instance to be negative class
+- (TPR = 1;FPR = 1): Model predicts every instance to be positive class
+- (TPR = 1;FPR = 0): Ideal model
+- A good model should be located as close as possible to the upper left corner
+
+_ROC curve: cont'd_
+
+- A model that makes random guesses is located along the main diagonal connecting the points (TPR = 0, FPR = 0) and (TPR = 1, FPR = 1)
+- Random guessing means that a record is classified as positive with fixed probability p
+- Suppose a dataset n+ positive instances and n- negative instances
+- Random classifier is expected to classify pn+ of the positive instances and misclassify pn- of the negative instances
+- TPR = (pn+) / n+ - p and FPR = (pn-) /n- = p
+- Since TPR = FPR, an ROC curve for random classifier with reside along the main diagonal
+- A classifier worse than random guessing will reside below the main diagonal
+
 - **Methods for performance evaluation**
   - How to obtain reliable estimates?
 - **Methods for model comparison**
@@ -273,10 +341,25 @@ F_1 = 2 / ((1 / r) + (1 / p)) = 2rp / (r + p)
 
 **Q) How do we calculate precision?**
 
-- TP / (TP + FP)
+- A) TP / (TP + FP)
   - Precision is an alternative way of evaluating the performance of a machine. It computes the fraction of records that actually turn out to be positive in the group the classifier has declared as the positive class. A higher precision implies a lower number of False Positive errors committed by the classifier.
 
 **Q) What does a high value of F_1 indicate?**
 
-- It indicates that both precision and recall are high
+- A) It indicates that both precision and recall are high
   - F_1 is the combination of the precision and recall metrics. A good model will have high precision and high recall, which will result in a high F_1 value. It can be difficult to develop a model that maximizes both metrics, however.
+
+**Q) Which process best describes how to partition data for cross validation?**
+
+- A) Partition data into k-1 training sets and 1 testing set
+  - The data are split into k disjoint sets, which are all equal in size (unlike holdout, which only has two sets). Then k-1 sets are used for training, while the remaining set is used for testing.
+
+**Q) Which description about the ROC curve is most accurate?**
+
+- A) The ROC curve plots TPR on the y-axis and the FPR on the x axis
+  - ROC curve plots the True Positive Rate against the False Positive Rate (on the y- and x-axis, respectively). Each point on the curve corresponds to one of the models induced by the classifier. In other words, each point is a configuration of one model.
+
+**Q) Suppose you are provided the ROC curve of a classifier, and you notice that the curve along the main diagonal of the graph, which is drawn from (TRN=0, FRN=0) and (TRN=1, FRN=1). What can you conclude about this classifier?**
+
+- A) The classifier is random guessing.
+  - Based on the graph, it would be safe to conclude that the classifier is random guessing.
