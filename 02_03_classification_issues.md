@@ -53,13 +53,17 @@
   - Optimistic approach
   - Pessimistic approach
 
+### Optimistic approach
+
+e'(T) = e(T) where e'(T) is testing error and e(T) is your training error
+
 ### Pessimistic approach
 
 **Incorporates model complexity in error computation**
 
 - For each leaf node, add penalty term (say, 0.5),
 - Total errors: e'(T) = e(T) + N \* 0.5(N: number of leaf nodes)
-- For a tree with 30 leaf nodes and 10 errors on training 9OUT OF 1000 instances):
+- For a tree with 30 leaf nodes and 10 errors on training 9OUT OF 1000 instances:
   - Training error = 10/1000 = 1%
 - Generalization error = (10 + 30 \* 0.5) / 1000 = 2.5%
 
