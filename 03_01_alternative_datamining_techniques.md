@@ -193,3 +193,50 @@ d(refund=Yes, refund=No) = |0/3 - 3/7| - |3/3 - 4/7| = 6/7
         ```
 
 **Naive bayes classifiers simplifies it with one assumption**
+
+## Naive Bayes classifier
+
+### How to estimate probability from data
+
+- **Class:** P(C) = N_c / N
+- For discrete attributes: P(A_i | C_k) = |A_ik| / N_c
+- For continuous attributes:
+  - Discretize each continuous attribute
+  - Replace with its corresponding discrete interval
+  - Compute conditional probability
+    - P(X_i | Y = y)
+  - Watch for estimation errors
+- Gaussian distribution
+
+### Example of Naive Bayes classifier
+
+X = (refund = no, married, income = 120k)
+
+```
+P(X|class = no) = P(refund = no|class = no)
+* P(married | class = no)
+* P(income = 120k | class = no)
+= 4 / 7 * 4 / 7 * 0.0072 = 0.0024
+
+P(X | class = yes) = P(Refund = no | class = yes)
+                     * P(married | class = yes)
+                     * P(income = 120k | class = yes)
+                     = 1 * 0 = 1.2 * 12^-9
+
+P(no | X) > P(yes | X)
+=> No else yes
+P (N_o | X) = [P(N_o)P(X|N_o)] / P(x)
+```
+
+### Naive Bayes classifier: probability estimation
+
+- **Original:** P(A_i|C) = N_ic / N_c
+- **Laplace::** P(A_i|C) = (N_ic + 1) / (N_c + c)
+- **m-estimate:** P(A_i|C) = (N_ic + mp) / (N_c + m) where m, p is some random number
+
+### Naive bayes (Summary)
+
+- Robust to isolated noise points are averaged out when estimating conditional probability
+- Handle missing values by ignoring the instance during probability estimate calculations
+- Robust to irrevalent attributes
+- Correlated attributes can degrade the performance of classifiers as the conditional independence assumption no longer holds
