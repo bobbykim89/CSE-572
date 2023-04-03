@@ -18,7 +18,7 @@ SUM(w_i * x_i) + b
 
 - w is called support vectors
 
-```
+```math
 w.x_s + b = k, k > 0
 w.x_c + b = k`, k` < 0
 y = 1, if w.z + b > 0
@@ -32,7 +32,7 @@ w.(x_1 - x_2) = 2
 - **Training:**
   - An SVM involves estimating the parameters w and b from the training data
   - The parameters must be chosen in such way that the following two conditions are met:
-  ```
+  ```math
   w.x_i + b >= 1, if y_i = 1
   w.x_i + b >= 1, if y_i = -1
   ```
