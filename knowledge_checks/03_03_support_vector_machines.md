@@ -49,4 +49,4 @@ Review the table labeled Figure 5: Support Vector Machine (SVM) Dataset.
 Your friend has asked you to train a Support Vector Machine (SVM) on the provided dataset. You check the dataset, which is two dimensional, and understand that there is no hyperplane that can completely separate the two classes. Therefore, linear SVM is not the best option.
 If you transform the data into three dimensions , and you decide to use non-linear SVM, which hyperplane will the SVM provide for separating the two classes?
 
-- $\x^2 + y^2 = 2.5
+- $\x^2 + y^2 = 2.5$
