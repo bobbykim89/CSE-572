@@ -108,4 +108,5 @@ time space requirements:
    - Compute the distance between any two pair of points, where one point belongs to one cluster and the other belongs to the other. Take the maximum of the distances.
 6. Figure 3: Four Faces with Patterned Clustering Regions. Review the image labeled Figure 3: Four Faces with Patterned Clustering Regions. You are asked to cluster the nose, eyes, and mouth regions of the faces in the provided image. Darkness or number of dots represents the density of data, and lines are used only to distinguish regions and do not represent data points. Using complete linkage (MAX) hierarchical clustering, in which faces will the nose, eyes, and mouth be well clustered based on the patterns?\
    <img src="knowledge_checks/img/04_02_06.png" width="700">
-   - a, b and c - Complete linkage does not work when there are islands of points separated by huge empty space.
+   - a, b and c
+     - Complete linkage does not work when there are islands of points separated by huge empty space.
